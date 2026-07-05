@@ -6,3 +6,6 @@ shap
 fastapi
 uvicorn
 python-multipart
+xgboost
+matplotlib
+seaborn

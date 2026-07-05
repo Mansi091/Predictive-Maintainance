@@ -8,4 +8,5 @@ scaler.pkl
 rui-dataset.csv
 test_batch.csv
 .agents/
-.gemini/
+model.pkl
+rui-dataset-engineered.csv

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Predictive Maintenance Monitor</title>
+    <link rel="stylesheet" href="index.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Predictive Maintenance Monitor</h1>
+            <p class="subtitle">Real-time telemetry diagnostics with SHAP Explainable AI (XAI)</p>
+        </header>
+
+        <div class="grid">
+            <section class="card inputs-section">
+                <h2>Machine Telemetry</h2>
+                <form id="telemetry-form">
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label for="air_temp">Air Temperature</label>
+                            <span class="value-display"><span id="air_temp_val">298.1</span> K</span>
+                        </div>
+                        <input type="range" id="air_temp" name="air_temp" min="290" max="310" step="0.1" value="298.1">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label for="process_temp">Process Temperature</label>
+                            <span class="value-display"><span id="process_temp_val">308.6</span> K</span>
+                        </div>
+                        <input type="range" id="process_temp" name="process_temp" min="300" max="320" step="0.1" value="308.6">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label for="rotational_speed">Rotational Speed</label>
+                            <span class="value-display"><span id="rotational_speed_val">1500</span> rpm</span>
+                        </div>
+                        <input type="range" id="rotational_speed" name="rotational_speed" min="1000" max="3000" step="10" value="1500">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label for="torque">Torque</label>
+                            <span class="value-display"><span id="torque_val">40.0</span> Nm</span>
+                        </div>
+                        <input type="range" id="torque" name="torque" min="5" max="80" step="0.5" value="40.0">
+                    </div>
+
+                    <div class="input-group">
+                        <div class="label-row">
+                            <label for="tool_wear">Tool Wear</label>
+                            <span class="value-display"><span id="tool_wear_val">50</span> min</span>
+                        </div>
+                        <input type="range" id="tool_wear" name="tool_wear" min="0" max="250" step="1" value="50">
+                    </div>
+                </form>
+            </section>
+
+            <section class="card diagnostics-section">
+                <h2>Diagnostics & Explanations</h2>
+                
+                <div class="result-box">
+                    <div class="risk-badge" id="risk-level">Low Risk</div>
+                    <div class="prob-display">
+                        <span class="prob-label">Failure Probability</span>
+                        <span class="prob-value" id="failure-probability">0.0%</span>
+                    </div>
+                </div>
+
+                <div class="recommendations">
+                    <h3>Maintenance Action Plan</h3>
+                    <p id="recommendation-text">Machine is operating within safe parameters. Continue standard operations.</p>
+                </div>
+
+                <div class="shap-container">
+                    <h3>SHAP Risk Contributions</h3>
+                    <p class="small-desc">Shows how much each sensor pushes the machine toward failure (+) or keeps it safe (-).</p>
+                    <div id="shap-bars" class="shap-list">
+                    </div>
+                </div>
+            </section>
+        </div>
+
+        <section class="card batch-section">
+            <h2>Batch CSV Ingestion</h2>
+            <p class="small-desc">Upload a CSV file containing machine telemetry to evaluate multiple assets simultaneously.</p>
+            
+            <div class="upload-zone">
+                <input type="file" id="csv-file" accept=".csv" style="display: none;">
+                <button type="button" class="btn" onclick="document.getElementById('csv-file').click()">Select Telemetry CSV</button>
+                <span id="file-name-display" class="file-name">No file selected</span>
+                <button type="button" id="upload-btn" class="btn btn-primary" disabled>Process Batch</button>
+            </div>
+
+            <div id="batch-results-summary" class="batch-summary" style="display: none;">
+                <div class="summary-grid">
+                    <div class="summary-metric">
+                        <span class="val" id="batch-total">0</span>
+                        <span class="lbl">Total Evaluated</span>
+                    </div>
+                    <div class="summary-metric critical">
+                        <span class="val" id="batch-failures">0</span>
+                        <span class="lbl">Imminent Failures Detected</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
