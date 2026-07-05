@@ -21,6 +21,12 @@ This repository contains an end-to-end Machine Learning and REST API system desi
 * **Avg API Latency:** **<5ms** (SHAP explanation latency reduced by 98% using TreeExplainer)
 * **Dataset Size:** **10,000** machine telemetry records
 
+### 📈 Model Evaluation Visualizations
+
+| Precision-Recall Curve & Threshold Tuning | Confusion Matrix |
+| :---: | :---: |
+| ![Precision-Recall Curve](static/eda/pr_curve.png) | ![Confusion Matrix](static/eda/confusion_matrix.png) |
+
 ---
 
 ## 🛠️ Project Architecture
